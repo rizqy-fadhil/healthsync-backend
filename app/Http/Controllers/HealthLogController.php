@@ -23,9 +23,9 @@ class HealthLogController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'water_intake' => 'nullable|integer|min:1',
-            'sleep_duration' => 'nullable|numeric|min:0.1',
-            'weight' => 'nullable|numeric|min:0.1',
+            'water_intake' => 'nullable|integer|min:0|max:40',
+            'sleep_duration' => 'nullable|numeric|min:0|max:24',
+            'weight' => 'nullable|numeric|min:10|max:300',
         ]);
 
         $log = $request->user()->healthLogs()->create($validated);
@@ -50,9 +50,9 @@ class HealthLogController extends Controller
         $log = $request->user()->healthLogs()->findOrFail($id);
 
         $validated = $request->validate([
-            'water_intake' => 'nullable|integer|min:1',
-            'sleep_duration' => 'nullable|numeric|min:0.1',
-            'weight' => 'nullable|numeric|min:0.1',
+            'water_intake' => 'nullable|integer|min:0|max:40',
+            'sleep_duration' => 'nullable|numeric|min:0|max:24',
+            'weight' => 'nullable|numeric|min:10|max:300',
         ]);
 
         $log->update($validated);
